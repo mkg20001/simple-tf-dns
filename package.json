@@ -12,5 +12,13 @@
     "records"
   ],
   "author": "Maciej Krüger <mkg20001@gmail.com>",
-  "license": "MPL-2.0"
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkg20001/simple-tf-dns.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mkg20001/simple-tf-dns/issues"
+  },
+  "homepage": "https://github.com/mkg20001/simple-tf-dns#readme"
 }
