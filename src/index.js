@@ -5,6 +5,10 @@ const {baseTemplate, recordTemplate} = require('./cloudflare') // TODO: make thi
 function processContents (contents, read, domain, ids) {
   let out = ''
 
+  if (!ids) {
+    ids = {}
+  }
+
   let nameMap = {}
 
   contents.split('\n').filter(l => l.trim()).filter(l => !l.startsWith('#')).map(line => line.replace(/\t+/g, ' ')).forEach(line => {
@@ -116,7 +120,7 @@ function processContents (contents, read, domain, ids) {
 
 function processFile (domain, read, file) {
   let out = baseTemplate(domain)
-  out += processContents(read(file), domain, {})
+  out += processContents(read(file), read, domain, {})
   return out
 }
 
