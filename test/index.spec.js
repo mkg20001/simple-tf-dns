@@ -18,7 +18,8 @@ const files = {
   dnslink: ['DNSLINK @ /ipfs/HASH', 'resource "cloudflare_record" "example-com_DNSLINK" {\n  domain  = "${var.domain}"\n  name = "_dnslink.example.com"\n  value = "dnslink=/ipfs/HASH"\n  type = "TXT"\n}\n'],
   include: ['INCLUDE txtRecord', 'resource "cloudflare_record" "example-com_TXT" {\n  domain  = "${var.domain}"\n  name = "example.com"\n  value = "some-value"\n  type = "TXT"\n}\n'],
   clink: ['AAAA @ ::1\nCLINK sub @', 'resource "cloudflare_record" "example-com_AAAA" {\n  domain  = "${var.domain}"\n  name = "example.com"\n  value = "::1"\n  type = "AAAA"\n  proxied = "false"\n}\n\nresource "cloudflare_record" "sub_CLINK_example-com_AAAA" {\n  domain  = "${var.domain}"\n  name = "sub"\n  value = "::1"\n  type = "AAAA"\n  proxied = "false"\n}\n'],
-  short: ['SHORT $ server%.example.com\nCNAME s-test $1', 'resource "cloudflare_record" "s-test_CNAME" {\n  domain  = "${var.domain}"\n  name = "s-test"\n  value = "server1.example.com"\n  type = "CNAME"\n  proxied = "false"\n}\n']
+  short: ['SHORT $ server%.example.com\nCNAME s-test $1', 'resource "cloudflare_record" "s-test_CNAME" {\n  domain  = "${var.domain}"\n  name = "s-test"\n  value = "server1.example.com"\n  type = "CNAME"\n  proxied = "false"\n}\n'],
+  shortName: ['SHORT $ server%.example.com\nA $1 1.2.3.4', 'resource "cloudflare_record" "server1_A" {\n  domain  = "${var.domain}"\n  name = "server1"\n  value = "1.2.3.4"\n  type = "A"\n  proxied = "false"\n}\n']
 }
 
 const read = (f) => files[f][0]
@@ -28,6 +29,9 @@ describe('simple-tf-dns', () => {
   for (const file in files) { // eslint-disable-line guard-for-in
     it('should compile ' + file + ' correctly', () => {
       let out = processFile('example.com', read, file)
+      if (!files[file][1]) {
+        console.log(JSON.stringify(out.substr(head.length))) // eslint-disable-line no-console
+      }
       assert.equal(out, head + files[file][1])
     })
   }

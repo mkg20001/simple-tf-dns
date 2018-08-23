@@ -78,6 +78,14 @@ function processContents (contents, read, domain, ids) {
     }
 
     name.forEach(name => {
+      let s = ids.short.filter(v => name.startsWith(v[0]))
+      if (s.length) {
+        name = s[0][1].replace('%', name.substr(1))
+        if (name.endsWith(domain) && name !== domain) {
+          name = name.replace('.' + domain, '')
+        }
+      }
+
       if (!nameMap[name]) {
         nameMap[name] = []
       }
