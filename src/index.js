@@ -7,6 +7,7 @@ function processContents (contents, read, domain, ids) {
 
   if (!ids) {
     ids = {}
+    ids.short = []
   }
 
   let nameMap = {}
@@ -52,18 +53,21 @@ function processContents (contents, read, domain, ids) {
       case 'INCLUDE':
         out += processContents(read(name[0]), read, domain, ids)
         return
+      case 'SHORT':
+        break
       default: throw new Error(type)
     }
 
     switch (type) {
       case 'CNAME':
       case 'MX':
-      case 'NS':
-        if (content.startsWith('$')) content = content.substr(1) + '.i.zion.host'
-        else if (content.startsWith('!')) content = content.substr(1) + '.i.mkg20001.io'
+      case 'NS': {
+        let s = ids.short.filter(v => content.startWith(v[0]))
+        if (s.length) content = s[0][1].replace('%', content.substr(1))
         else if (content.endsWith('.')) content = content.substr(0, content.length - 1)
         else content += '.' + domain
         break
+      }
       default: // throw new TypeError(type)
     }
 
@@ -105,6 +109,9 @@ function processContents (contents, read, domain, ids) {
           break
         case 'MX':
           data = {name, value: content, type, priority: prio}
+          break
+        case 'SHORT':
+          ids.short.push([name, content])
           break
         default: throw new Error(type)
       }

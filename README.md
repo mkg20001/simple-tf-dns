@@ -38,5 +38,9 @@ INCLUDE	global-mail-settings
 CLINK	lb-test	server1
 CLINK	lb-test	server2
 
+# SHORT allows for pattern-reuse
+SHORT	$	server%.example.com
+CNAME	s-test	$1
+
 # TODO: hidden (CLINK only) sub-domains
 ```
