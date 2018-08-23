@@ -1,6 +1,6 @@
 {
   "name": "simple-tf-dns",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A tool made to make working with static terraform records simpler",
   "main": "src/index.js",
   "bin": {

@@ -1,3 +1,13 @@
+<a name="0.0.4"></a>
+## [0.0.4](https://github.com/mkg20001/simple-tf-dns/compare/v0.0.3...v0.0.4) (2018-08-23)
+
+
+### Features
+
+* Add short function for name too ([e9c0f8b](https://github.com/mkg20001/simple-tf-dns/commit/e9c0f8b))
+
+
+
 <a name="0.0.3"></a>
 ## 0.0.3 (2018-08-23)
 
