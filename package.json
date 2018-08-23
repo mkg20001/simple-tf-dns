@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/mkg20001/simple-tf-dns/issues"
   },
-  "homepage": "https://github.com/mkg20001/simple-tf-dns#readme"
+  "homepage": "https://github.com/mkg20001/simple-tf-dns#readme",
+  "contributors": [
+    "Maciej Krüger <mkg20001@gmail.com>"
+  ]
 }
