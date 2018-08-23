@@ -7,7 +7,13 @@
     "simple-tf-dns": "bin.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "aegir lint",
+    "test": "aegir test -t node",
+    "release": "aegir release -t node",
+    "release-minor": "aegir release -t node --type minor",
+    "release-major": "aegir release -t node --type major",
+    "coverage": "aegir coverage",
+    "coverage-publish": "aegir coverage -u"
   },
   "keywords": [
     "terraform",

@@ -2,6 +2,7 @@
 
 /* eslint-disable no-tabs */
 /* eslint-disable no-template-curly-in-string */
+/* eslint-env mocha */
 
 const {processFile} = require('..')
 
