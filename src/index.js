@@ -7,6 +7,9 @@ function processContents (contents, read, domain, ids) {
 
   if (!ids) {
     ids = {}
+  }
+
+  if (!ids.short) {
     ids.short = []
   }
 
@@ -54,6 +57,7 @@ function processContents (contents, read, domain, ids) {
         out += processContents(read(name[0]), read, domain, ids)
         return
       case 'SHORT':
+        content = s[0]
         break
       default: throw new Error(type)
     }
@@ -61,9 +65,11 @@ function processContents (contents, read, domain, ids) {
     switch (type) {
       case 'CNAME':
       case 'MX':
+      case 'CLINK':
       case 'NS': {
-        let s = ids.short.filter(v => content.startWith(v[0]))
-        if (s.length) content = s[0][1].replace('%', content.substr(1))
+        let s = ids.short.filter(v => content.startsWith(v[0]))
+        if (content === '@') content = domain
+        else if (s.length) content = s[0][1].replace('%', content.substr(1))
         else if (content.endsWith('.')) content = content.substr(0, content.length - 1)
         else content += '.' + domain
         break
